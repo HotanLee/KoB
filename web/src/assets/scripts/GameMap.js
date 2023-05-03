@@ -10,7 +10,7 @@ export class GameMap extends AcGameObject {
         this.L = 0
 
         this.rows = 13
-        this.cols = 13
+        this.cols = 14
 
         this.innner_walls_count = 20
         this.walls = []
@@ -48,16 +48,16 @@ export class GameMap extends AcGameObject {
         }
 
         // 创建随机障碍物
-        for (let i = 0; i < this.innner_walls_count; i ++ ) {
+        for (let i = 0; i < this.innner_walls_count / 2; i ++ ) {
             for (let j = 0; j < 1000; j ++ ) {
                 let r = parseInt(Math.random() * this.rows)
                 let c = parseInt(Math.random() * this.cols)
 
-                if (g[r][c] || g[c][r]) continue
+                if (g[r][c] || g[this.rows - 1 - r][this.cols - 1 - c]) continue
                 if (r == this.rows - 2 && c == 1 || r == 1 && c == this.cols - 2)
                     continue
                 
-                g[r][c] = g[c][r] = true
+                g[r][c] = g[this.rows - 1 - r][this.cols - 1 - c] = true
                 break
             }
         }
